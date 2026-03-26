@@ -36,9 +36,9 @@ suite "ordinal":
     check ordinal(-11) == "-11th"
 
   test "French masculine":
-    check ordinal(1, gMasc, LangFr) == "1er"
-    check ordinal(2, gMasc, LangFr) == "2e"
-    check ordinal(10, gMasc, LangFr) == "10e"
+    check ordinal(1, gMas, LangFr) == "1er"
+    check ordinal(2, gMas, LangFr) == "2e"
+    check ordinal(10, gMas, LangFr) == "10e"
 
   test "French feminine":
     check ordinal(1, gFem, LangFr) == "1re"

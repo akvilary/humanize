@@ -27,7 +27,7 @@ type
 
   Gender* = enum
     ## Grammatical gender for ordinals in gendered languages.
-    gMasc
+    gMas
     gFem
 
   Plurals* = object

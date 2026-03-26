@@ -47,7 +47,7 @@ With locales and gender:
 import humanize
 import humanize/lang/fr
 
-echo ordinal(1, gMasc, LangFr)  # "1er"
+echo ordinal(1, gMas, LangFr)  # "1er"
 echo ordinal(1, gFem, LangFr)   # "1re"
 echo ordinal(2, locale = LangFr)     # "2e"
 ```
