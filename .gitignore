@@ -1,0 +1,8 @@
+tests/test_locale
+tests/test_filesize
+tests/test_number
+tests/test_list
+tests/test_time
+tests/test_duration
+nimblecache/
+nimcache/
