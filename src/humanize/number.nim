@@ -8,7 +8,7 @@ import ./locale
 
 func ordinal*(
   n: int,
-  gender: Gender = gMas,
+  gender: Gender = gMasc,
   locale: Locale = LangEn,
 ): string =
   ## Convert an integer to its ordinal string representation.
