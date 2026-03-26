@@ -1,7 +1,7 @@
 ## humanize - Human-readable formatting for Nim.
 ##
 ## Import this module to get access to all humanize functions:
-## - Number formatting: `ordinal`, `numComma`, `numWord`, `apNumber`
+## - Number formatting: `ordinal`, `numComma`, `numWord`, `numName`
 ## - File sizes: `naturalSize`, `parseSize`
 ## - Time: `naturalTime`, `naturalDelta`, `naturalDay`, `naturalDate`
 ## - Duration: `preciseDelta`

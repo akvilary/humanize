@@ -97,19 +97,19 @@ suite "numWord":
   test "negative":
     check numWord(-1_000_000'i64) == "-1.0 million"
 
-suite "apNumber":
+suite "numName":
   test "1-9 returns words":
-    check apNumber(1) == "one"
-    check apNumber(2) == "two"
-    check apNumber(5) == "five"
-    check apNumber(9) == "nine"
+    check numName(1) == "one"
+    check numName(2) == "two"
+    check numName(5) == "five"
+    check numName(9) == "nine"
 
   test "0 returns digit":
-    check apNumber(0) == "0"
+    check numName(0) == "0"
 
   test "10+ returns digits":
-    check apNumber(10) == "10"
-    check apNumber(100) == "100"
+    check numName(10) == "10"
+    check numName(100) == "100"
 
   test "negative returns digits":
-    check apNumber(-1) == "-1"
+    check numName(-1) == "-1"

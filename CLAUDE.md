@@ -21,7 +21,7 @@ src/
     filesize.nim            # naturalSize, parseSize, byte constants
     time.nim                # naturalTime, naturalDelta, naturalDay, naturalDate
     duration.nim            # preciseDelta
-    number.nim              # ordinal, numComma, numWord, apNumber
+    number.nim              # ordinal, numComma, numWord, numName
     list.nim                # naturalList
     lang/
       ar.nim, de.nim, es.nim, fr.nim, it.nim, ru.nim, zh.nim

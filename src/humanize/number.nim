@@ -1,6 +1,6 @@
 ## Number formatting for humanize.
 ##
-## Provides `ordinal`, `numComma`, `numWord`, and `apNumber` for
+## Provides `ordinal`, `numComma`, `numWord`, and `numName` for
 ## human-readable number formatting with locale support.
 
 import std/[strutils, math]
@@ -142,16 +142,16 @@ func numWord*(
   let s = formatted & " " & label
   if n < 0.0: "-" & s else: s
 
-func apNumber*(
+func numName*(
   n: int,
   locale: Locale = LangEn,
 ): string =
-  ## For numbers 1-9, return the Associated Press style name.
+  ## For numbers 1-9, return the word name.
   ## For other values, return the number as a string.
   ##
   ## .. code-block:: nim
-  ##   apNumber(1)  # "one"
-  ##   apNumber(10) # "10"
+  ##   numName(1)  # "one"
+  ##   numName(10) # "10"
   if n >= 1 and n <= 9 and locale.apWords.len >= 9:
     locale.apWords[n - 1]
   else:

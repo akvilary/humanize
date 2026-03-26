@@ -89,18 +89,18 @@ echo numWord(1_000_000_000'i64) # "1.0 billion"
 echo numWord(999_999'i64)       # "999,999" (below threshold)
 ```
 
-### apNumber
+### numName
 
 Associated Press style: numbers 1-9 as words, others as digits.
 
 ```nim
 import humanize
 
-echo apNumber(1)   # "one"
-echo apNumber(5)   # "five"
-echo apNumber(9)   # "nine"
-echo apNumber(10)  # "10"
-echo apNumber(0)   # "0"
+echo numName(1)   # "one"
+echo numName(5)   # "five"
+echo numName(9)   # "nine"
+echo numName(10)  # "10"
+echo numName(0)   # "0"
 ```
 
 ## File Sizes
@@ -352,7 +352,7 @@ import humanize/list
 | `numComma(n, locale?)` | `numComma(1000)` -> `"1,000"` |
 | `numComma(n, ndigits?, locale?)` | `numComma(1234.5, 2)` -> `"1,234.50"` |
 | `numWord(n, locale?)` | `numWord(1_000_000)` -> `"1.0 million"` |
-| `apNumber(n, locale?)` | `apNumber(5)` -> `"five"` |
+| `numName(n, locale?)` | `numName(5)` -> `"five"` |
 
 ### File Size Module (`humanize/filesize`)
 
