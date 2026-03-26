@@ -21,9 +21,9 @@ src/
     filesize.nim            # naturalSize, parseSize, byte constants
     time.nim                # naturalTime, naturalDelta, naturalDay, naturalDate
     duration.nim            # preciseDelta
-    number.nim              # ordinal, intComma, intWord, apNumber
+    number.nim              # ordinal, numComma, numWord, apNumber
     list.nim                # naturalList
-    locales/
+    lang/
       ar.nim, de.nim, es.nim, fr.nim, it.nim, ru.nim, zh.nim
 
 tests/
@@ -41,7 +41,7 @@ nimble test
 
 - All functions take an explicit `locale` parameter (default: English)
 - No global state, no thread-local activation
-- Locales are imported explicitly: `import humanize/locales/ru`
+- Locales are imported explicitly: `import humanize/lang/ru`
 - Locale is always the last parameter (for convenient defaulting)
 - `PluralRule` and `OrdinalRule` are enums, not procs — Locale can be `const`
 - File sizes always use "." decimal separator (international units)
@@ -63,7 +63,7 @@ Plurals = object
 
 Locale = object  # all enums, no procs — can be const
   name, pluralRule, ordinalRule, timeUnits, agoFmt, fromNowFmt, justNow,
-  thousandsSep, decimalSep, numberWords, intWordLabels,
+  thousandsSep, decimalSep, numberWords, numWordLabels,
   conjunction, serialComma, today, tomorrow, yesterday
 ```
 
@@ -84,9 +84,9 @@ Locale = object  # all enums, no procs — can be const
 1. **Plurals**: Simple 3 forms (one, few, many) for all languages. No variant objects.
 2. **Locale parameter**: Explicit on every function, not global state.
 3. **Filesize**: No locale param — decimal sep always ".", units are international.
-4. **Hybrid localization**: Default `en` in locale.nim, others via `import humanize/locales/xx`.
+4. **Hybrid localization**: Default `en` in locale.nim, others via `import humanize/lang/xx`.
 5. **Enums over procs**: PluralRule and OrdinalRule are enums so Locale can be `const`.
-6. **Best practices from Python humanize**: flat API, graceful degradation, format strings, suppress param in preciseDelta, rounding promotion in intWord, gendered ordinals.
+6. **Best practices from Python humanize**: flat API, graceful degradation, format strings, suppress param in preciseDelta, rounding promotion in numWord, gendered ordinals.
 7. **Best practices from Go go-humanize**: byte constants, parseSize, three size systems (binary/SI/GNU), magnitude thresholds for time.
 
 ## Locales to ship

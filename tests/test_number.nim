@@ -1,8 +1,8 @@
 import std/unittest
 import humanize/number
 import humanize/locale
-import humanize/locales/de
-import humanize/locales/fr
+import humanize/lang/de
+import humanize/lang/fr
 
 suite "ordinal":
   test "English basics":
@@ -36,66 +36,66 @@ suite "ordinal":
     check ordinal(-11) == "-11th"
 
   test "French masculine":
-    check ordinal(1, gMasculine, LocaleFr) == "1er"
-    check ordinal(2, gMasculine, LocaleFr) == "2e"
-    check ordinal(10, gMasculine, LocaleFr) == "10e"
+    check ordinal(1, gMasc, LangFr) == "1er"
+    check ordinal(2, gMasc, LangFr) == "2e"
+    check ordinal(10, gMasc, LangFr) == "10e"
 
   test "French feminine":
-    check ordinal(1, gFeminine, LocaleFr) == "1re"
-    check ordinal(2, gFeminine, LocaleFr) == "2e"
+    check ordinal(1, gFem, LangFr) == "1re"
+    check ordinal(2, gFem, LangFr) == "2e"
 
   test "German":
-    check ordinal(1, locale = LocaleDe) == "1."
-    check ordinal(42, locale = LocaleDe) == "42."
+    check ordinal(1, locale = LangDe) == "1."
+    check ordinal(42, locale = LangDe) == "42."
 
-suite "intComma":
+suite "numComma":
   test "small numbers":
-    check intComma(100) == "100"
-    check intComma(999) == "999"
+    check numComma(100) == "100"
+    check numComma(999) == "999"
 
   test "thousands":
-    check intComma(1000) == "1,000"
-    check intComma(10000) == "10,000"
-    check intComma(100000) == "100,000"
+    check numComma(1000) == "1,000"
+    check numComma(10000) == "10,000"
+    check numComma(100000) == "100,000"
 
   test "large":
-    check intComma(1000000) == "1,000,000"
-    check intComma(1234567890) == "1,234,567,890"
+    check numComma(1000000) == "1,000,000"
+    check numComma(1234567890) == "1,234,567,890"
 
   test "negative":
-    check intComma(-1234) == "-1,234"
-    check intComma(-1000000) == "-1,000,000"
+    check numComma(-1234) == "-1,234"
+    check numComma(-1000000) == "-1,000,000"
 
   test "zero":
-    check intComma(0) == "0"
+    check numComma(0) == "0"
 
   test "float":
-    check intComma(1234567.89, 2) == "1,234,567.89"
-    check intComma(1000.0, 2) == "1,000.00"
+    check numComma(1234567.89, 2) == "1,234,567.89"
+    check numComma(1000.0, 2) == "1,000.00"
 
   test "German locale":
-    check intComma(1000, LocaleDe) == "1.000"
-    check intComma(1000000, LocaleDe) == "1.000.000"
+    check numComma(1000, LangDe) == "1.000"
+    check numComma(1000000, LangDe) == "1.000.000"
 
-suite "intWord":
+suite "numWord":
   test "below million":
-    check intWord(999_999'i64) == "999,999"
-    check intWord(100'i64) == "100"
+    check numWord(999_999'i64) == "999,999"
+    check numWord(100'i64) == "100"
 
   test "millions":
-    check intWord(1_000_000'i64) == "1.0 million"
-    check intWord(1_200_000'i64) == "1.2 million"
-    check intWord(5_000_000'i64) == "5.0 million"
+    check numWord(1_000_000'i64) == "1.0 million"
+    check numWord(1_200_000'i64) == "1.2 million"
+    check numWord(5_000_000'i64) == "5.0 million"
 
   test "billions":
-    check intWord(1_000_000_000'i64) == "1.0 billion"
-    check intWord(2_500_000_000'i64) == "2.5 billion"
+    check numWord(1_000_000_000'i64) == "1.0 billion"
+    check numWord(2_500_000_000'i64) == "2.5 billion"
 
   test "trillions":
-    check intWord(1_000_000_000_000'i64) == "1.0 trillion"
+    check numWord(1_000_000_000_000'i64) == "1.0 trillion"
 
   test "negative":
-    check intWord(-1_000_000'i64) == "-1.0 million"
+    check numWord(-1_000_000'i64) == "-1.0 million"
 
 suite "apNumber":
   test "1-9 returns words":

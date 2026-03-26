@@ -67,7 +67,7 @@ func preciseDelta*(
   minimumUnit: DurationUnit = duSeconds,
   suppress: seq[DurationUnit] = default(seq[DurationUnit]),
   format: string = "%.2f",
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Convert a Duration to a precise, multi-unit human-readable string.
   ##
@@ -134,7 +134,7 @@ func preciseDelta*(
   minimumUnit: DurationUnit = duSeconds,
   suppress: seq[DurationUnit] = default(seq[DurationUnit]),
   format: string = "%.2f",
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Convenience overload taking seconds as int.
   preciseDelta(initDuration(seconds = seconds), minimumUnit, suppress,

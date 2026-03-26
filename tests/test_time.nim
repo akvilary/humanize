@@ -1,6 +1,6 @@
 import std/[unittest, times, strutils]
 import humanize/time
-import humanize/locales/de
+import humanize/lang/de
 
 suite "naturalDelta":
   test "zero":
@@ -49,7 +49,7 @@ suite "naturalDelta":
     check naturalDelta(3600) == "1 hour"
 
   test "German locale":
-    check naturalDelta(initDuration(seconds = 30), locale = LocaleDe) ==
+    check naturalDelta(initDuration(seconds = 30), locale = LangDe) ==
       "30 Sekunden"
 
 suite "naturalTime":
@@ -72,7 +72,7 @@ suite "naturalTime":
 
   test "German locale":
     let past = base - initDuration(hours = 2)
-    check naturalTime(past, base, locale = LocaleDe) == "vor 2 Stunden"
+    check naturalTime(past, base, locale = LangDe) == "vor 2 Stunden"
 
 suite "naturalDay":
   let base = dateTime(2025, mJan, 15, 12, 0, 0, 0, utc())

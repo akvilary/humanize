@@ -2,7 +2,7 @@
 
 import ../locale
 
-const LocaleIt* = Locale(
+const LangIt* = Locale(
   name: "it",
   pluralRule: prGermanic,
   ordinalRule: orItalian,

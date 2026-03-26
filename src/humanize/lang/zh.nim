@@ -2,7 +2,7 @@
 
 import ../locale
 
-const LocaleZh* = Locale(
+const LangZh* = Locale(
   name: "zh",
   pluralRule: prInvariant,
   ordinalRule: orChinese,

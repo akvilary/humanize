@@ -1,6 +1,6 @@
 ## Number formatting for humanize.
 ##
-## Provides `ordinal`, `intComma`, `intWord`, and `apNumber` for
+## Provides `ordinal`, `numComma`, `numWord`, and `apNumber` for
 ## human-readable number formatting with locale support.
 
 import std/[strutils, math]
@@ -8,8 +8,8 @@ import ./locale
 
 func ordinal*(
   n: int,
-  gender: Gender = gMasculine,
-  locale: Locale = DefaultLocale,
+  gender: Gender = gMasc,
+  locale: Locale = LangEn,
 ): string =
   ## Convert an integer to its ordinal string representation.
   ##
@@ -36,15 +36,15 @@ func ordinal*(
       s & "th"
   of orFrench:
     if abs(n) == 1:
-      if gender == gFeminine: s & "re" else: s & "er"
+      if gender == gFem: s & "re" else: s & "er"
     else:
       s & "e"
   of orGerman:
     s & "."
   of orSpanish:
-    if gender == gFeminine: s & ".\xC2\xAA" else: s & ".\xC2\xBA"  # .ª / .º
+    if gender == gFem: s & ".\xC2\xAA" else: s & ".\xC2\xBA"  # .ª / .º
   of orItalian:
-    if gender == gFeminine: s & "\xC2\xAA" else: s & "\xC2\xBA"  # ª / º
+    if gender == gFem: s & "\xC2\xAA" else: s & "\xC2\xBA"  # ª / º
   of orRussian:
     s & "-\xD0\xB9"  # -й
   of orChinese:
@@ -52,15 +52,15 @@ func ordinal*(
   of orArabic:
     s
 
-func intComma*(
+func numComma*(
   n: int,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Format an integer with thousands separators.
   ##
   ## .. code-block:: nim
-  ##   intComma(1000)    # "1,000"
-  ##   intComma(1000000) # "1,000,000"
+  ##   numComma(1000)    # "1,000"
+  ##   numComma(1000000) # "1,000,000"
   let neg = n < 0
   let digits = $abs(n)
   let sep = locale.thousandsSep
@@ -71,20 +71,20 @@ func intComma*(
     s.add(digits[i])
   if neg: "-" & s else: s
 
-func intComma*(
+func numComma*(
   n: float64,
   ndigits: int = 2,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Format a float with thousands separators and decimal places.
   ##
   ## .. code-block:: nim
-  ##   intComma(1234567.89) # "1,234,567.89"
+  ##   numComma(1234567.89) # "1,234,567.89"
   let neg = n < 0.0
   let absN = abs(n)
   let intPart = int(absN)
   let fracPart = absN - float64(intPart)
-  var s = intComma(intPart, locale)
+  var s = numComma(intPart, locale)
   if ndigits > 0:
     let frac = formatFloat(fracPart, ffDecimal, ndigits)
     # frac looks like "0.XX" — take everything after "0."
@@ -92,26 +92,26 @@ func intComma*(
     s.add(frac[2 .. ^1])
   if neg: "-" & s else: s
 
-func intWord*(
+func numWord*(
   n: int64,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Convert a large integer to a human-readable word form.
   ##
   ## .. code-block:: nim
-  ##   intWord(1_000_000)     # "1.0 million"
-  ##   intWord(1_200_000)     # "1.2 million"
-  ##   intWord(1_000_000_000) # "1.0 billion"
+  ##   numWord(1_000_000)     # "1.0 million"
+  ##   numWord(1_200_000)     # "1.2 million"
+  ##   numWord(1_000_000_000) # "1.0 billion"
   let absN = abs(n).float64
   if absN < 1_000_000.0:
-    return intComma(n.int, locale)
+    return numComma(n.int, locale)
   # Find the largest matching word
   var bestIdx = -1
   for i in 0 ..< locale.numberWords.len:
     if absN >= locale.numberWords[i].value:
       bestIdx = i
   if bestIdx < 0:
-    return intComma(n.int, locale)
+    return numComma(n.int, locale)
   let word = locale.numberWords[bestIdx]
   let value = absN / word.value
   let intValue = int(value)
@@ -120,20 +120,20 @@ func intWord*(
   let s = formatted & " " & label
   if n < 0: "-" & s else: s
 
-func intWord*(
+func numWord*(
   n: float64,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
-  ## Float overload of `intWord`.
+  ## Float overload of `numWord`.
   let absN = abs(n)
   if absN < 1_000_000.0:
-    return intComma(int(n), locale)
+    return numComma(int(n), locale)
   var bestIdx = -1
   for i in 0 ..< locale.numberWords.len:
     if absN >= locale.numberWords[i].value:
       bestIdx = i
   if bestIdx < 0:
-    return intComma(int(n), locale)
+    return numComma(int(n), locale)
   let word = locale.numberWords[bestIdx]
   let value = absN / word.value
   let intValue = int(value)
@@ -144,7 +144,7 @@ func intWord*(
 
 func apNumber*(
   n: int,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## For numbers 1-9, return the Associated Press style name.
   ## For other values, return the number as a string.

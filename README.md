@@ -18,7 +18,7 @@ nimble install humanize
 ```nim
 import humanize
 
-echo intComma(1_000_000)         # "1,000,000"
+echo numComma(1_000_000)         # "1,000,000"
 echo ordinal(3)                  # "3rd"
 echo naturalSize(1_500_000'i64)  # "1.5 MB"
 echo naturalList(["a", "b", "c"]) # "a, b and c"
@@ -45,48 +45,48 @@ With locales and gender:
 
 ```nim
 import humanize
-import humanize/locales/fr
+import humanize/lang/fr
 
-echo ordinal(1, gMasculine, LocaleFr)  # "1er"
-echo ordinal(1, gFeminine, LocaleFr)   # "1re"
-echo ordinal(2, locale = LocaleFr)     # "2e"
+echo ordinal(1, gMasc, LangFr)  # "1er"
+echo ordinal(1, gFem, LangFr)   # "1re"
+echo ordinal(2, locale = LangFr)     # "2e"
 ```
 
-### intComma
+### numComma
 
 Format a number with thousands separators.
 
 ```nim
 import humanize
 
-echo intComma(1000)       # "1,000"
-echo intComma(1_000_000)  # "1,000,000"
-echo intComma(-1234)      # "-1,234"
+echo numComma(1000)       # "1,000"
+echo numComma(1_000_000)  # "1,000,000"
+echo numComma(-1234)      # "-1,234"
 
 # Float overload with decimal places
-echo intComma(1234567.89, 2)  # "1,234,567.89"
+echo numComma(1234567.89, 2)  # "1,234,567.89"
 ```
 
 With a German locale:
 
 ```nim
 import humanize
-import humanize/locales/de
+import humanize/lang/de
 
-echo intComma(1_000_000, LocaleDe)  # "1.000.000"
+echo numComma(1_000_000, LangDe)  # "1.000.000"
 ```
 
-### intWord
+### numWord
 
 Convert large integers to a readable word form.
 
 ```nim
 import humanize
 
-echo intWord(1_000_000'i64)     # "1.0 million"
-echo intWord(1_200_000'i64)     # "1.2 million"
-echo intWord(1_000_000_000'i64) # "1.0 billion"
-echo intWord(999_999'i64)       # "999,999" (below threshold)
+echo numWord(1_000_000'i64)     # "1.0 million"
+echo numWord(1_200_000'i64)     # "1.2 million"
+echo numWord(1_000_000_000'i64) # "1.0 billion"
+echo numWord(999_999'i64)       # "999,999" (below threshold)
 ```
 
 ### apNumber
@@ -280,13 +280,13 @@ Every function accepts a `locale` parameter (always the last argument, defaults 
 
 ```nim
 import humanize
-import humanize/locales/de
-import humanize/locales/ru
+import humanize/lang/de
+import humanize/lang/ru
 
-echo intComma(1_000_000, LocaleDe)  # "1.000.000"
-echo naturalDelta(initDuration(seconds = 30), locale = LocaleRu)
+echo numComma(1_000_000, LangDe)  # "1.000.000"
+echo naturalDelta(initDuration(seconds = 30), locale = LangRu)
 # "30 секунд"
-echo naturalList(["a", "b", "c"], LocaleDe)
+echo naturalList(["a", "b", "c"], LangDe)
 # "a, b und c"
 ```
 
@@ -294,14 +294,14 @@ echo naturalList(["a", "b", "c"], LocaleDe)
 
 | Import | Constant | Language |
 |--------|----------|----------|
-| *(built-in)* | `DefaultLocale` | English |
-| `humanize/locales/ar` | `LocaleAr` | Arabic |
-| `humanize/locales/de` | `LocaleDe` | German |
-| `humanize/locales/es` | `LocaleEs` | Spanish |
-| `humanize/locales/fr` | `LocaleFr` | French |
-| `humanize/locales/it` | `LocaleIt` | Italian |
-| `humanize/locales/ru` | `LocaleRu` | Russian |
-| `humanize/locales/zh` | `LocaleZh` | Chinese |
+| *(built-in)* | `LangEn` | English |
+| `humanize/lang/ar` | `LangAr` | Arabic |
+| `humanize/lang/de` | `LangDe` | German |
+| `humanize/lang/es` | `LangEs` | Spanish |
+| `humanize/lang/fr` | `LangFr` | French |
+| `humanize/lang/it` | `LangIt` | Italian |
+| `humanize/lang/ru` | `LangRu` | Russian |
+| `humanize/lang/zh` | `LangZh` | Chinese |
 
 ### Custom Locale
 
@@ -319,12 +319,12 @@ const MyLocale = Locale(
     # ... fill all fields
   ),
   conjunction: "and",
-  serialComma: true,  # Oxford comma
+  serialComma: true,  # Oxford numComma
   # ... other fields
 )
 
 echo naturalList(["a", "b", "c"], MyLocale)
-# "a, b, and c"  (note the Oxford comma)
+# "a, b, and c"  (note the Oxford numComma)
 ```
 
 ## Selective Imports
@@ -349,9 +349,9 @@ import humanize/list
 | Proc | Description |
 |------|-------------|
 | `ordinal(n, gender?, locale?)` | `ordinal(3)` -> `"3rd"` |
-| `intComma(n, locale?)` | `intComma(1000)` -> `"1,000"` |
-| `intComma(n, ndigits?, locale?)` | `intComma(1234.5, 2)` -> `"1,234.50"` |
-| `intWord(n, locale?)` | `intWord(1_000_000)` -> `"1.0 million"` |
+| `numComma(n, locale?)` | `numComma(1000)` -> `"1,000"` |
+| `numComma(n, ndigits?, locale?)` | `numComma(1234.5, 2)` -> `"1,234.50"` |
+| `numWord(n, locale?)` | `numWord(1_000_000)` -> `"1.0 million"` |
 | `apNumber(n, locale?)` | `apNumber(5)` -> `"five"` |
 
 ### File Size Module (`humanize/filesize`)

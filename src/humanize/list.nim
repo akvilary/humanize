@@ -6,7 +6,7 @@ import ./locale
 
 func naturalList*(
   items: openArray[string],
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Join a list of strings in a human-readable way.
   ##

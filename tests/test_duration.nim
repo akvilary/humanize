@@ -1,6 +1,6 @@
 import std/[unittest, times, strutils]
 import humanize/duration
-import humanize/locales/de
+import humanize/lang/de
 
 suite "preciseDelta":
   test "zero":
@@ -50,7 +50,7 @@ suite "preciseDelta":
   test "German locale":
     let result = preciseDelta(
       initDuration(seconds = 90),
-      locale = LocaleDe,
+      locale = LangDe,
     )
     check "Minute" in result
     check "Sekunden" in result

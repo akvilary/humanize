@@ -2,7 +2,7 @@
 
 import ../locale
 
-const LocaleRu* = Locale(
+const LangRu* = Locale(
   name: "ru",
   pluralRule: prSlavic,
   ordinalRule: orRussian,

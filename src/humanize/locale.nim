@@ -27,8 +27,8 @@ type
 
   Gender* = enum
     ## Grammatical gender for ordinals in gendered languages.
-    gMasculine
-    gFeminine
+    gMasc
+    gFem
 
   Plurals* = object
     ## Three plural forms covering all shipped languages.
@@ -108,7 +108,7 @@ func pluralize*(
   of prInvariant:
     forms.many
 
-const DefaultLocale* = Locale(
+const LangEn* = Locale(
   name: "en",
   pluralRule: prGermanic,
   ordinalRule: orEnglish,

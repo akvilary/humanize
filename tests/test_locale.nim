@@ -1,12 +1,12 @@
 import std/unittest
 import humanize/locale
-import humanize/locales/de
-import humanize/locales/es
-import humanize/locales/fr
-import humanize/locales/it
-import humanize/locales/ru
-import humanize/locales/zh
-import humanize/locales/ar
+import humanize/lang/ar
+import humanize/lang/de
+import humanize/lang/es
+import humanize/lang/fr
+import humanize/lang/it
+import humanize/lang/ru
+import humanize/lang/zh
 
 suite "pluralize":
   let forms = Plurals(one: "cat", few: "cats", many: "cats")
@@ -82,57 +82,51 @@ suite "pluralize - Slavic rule":
   test "negative -21 -> one":
     check pluralize(-21, forms, prSlavic) == "год"
 
-suite "DefaultLocale":
+suite "LangEn":
   test "name is en":
-    check DefaultLocale.name == "en"
+    check LangEn.name == "en"
 
   test "pluralRule is Germanic":
-    check DefaultLocale.pluralRule == prGermanic
+    check LangEn.pluralRule == prGermanic
 
   test "ordinalRule is English":
-    check DefaultLocale.ordinalRule == orEnglish
+    check LangEn.ordinalRule == orEnglish
 
   test "has number words":
-    check DefaultLocale.numberWords.len >= 10
+    check LangEn.numberWords.len >= 10
 
   test "has AP words":
-    check DefaultLocale.apWords.len == 9
+    check LangEn.apWords.len == 9
 
 suite "locale definitions":
-  test "German locale":
-    check LocaleDe.name == "de"
-    check LocaleDe.pluralRule == prGermanic
-    check LocaleDe.ordinalRule == orGerman
+  test "German":
+    check LangDe.name == "de"
+    check LangDe.pluralRule == prGermanic
+    check LangDe.ordinalRule == orGerman
 
-  test "Spanish locale":
-    check LocaleEs.name == "es"
-    check LocaleEs.pluralRule == prGermanic
-    check LocaleEs.ordinalRule == orSpanish
+  test "Spanish":
+    check LangEs.name == "es"
+    check LangEs.ordinalRule == orSpanish
 
-  test "French locale":
-    check LocaleFr.name == "fr"
-    check LocaleFr.pluralRule == prFrench
-    check LocaleFr.ordinalRule == orFrench
+  test "French":
+    check LangFr.name == "fr"
+    check LangFr.pluralRule == prFrench
 
-  test "Italian locale":
-    check LocaleIt.name == "it"
-    check LocaleIt.pluralRule == prGermanic
-    check LocaleIt.ordinalRule == orItalian
+  test "Italian":
+    check LangIt.name == "it"
+    check LangIt.ordinalRule == orItalian
 
-  test "Russian locale":
-    check LocaleRu.name == "ru"
-    check LocaleRu.pluralRule == prSlavic
-    check LocaleRu.ordinalRule == orRussian
+  test "Russian":
+    check LangRu.name == "ru"
+    check LangRu.pluralRule == prSlavic
 
-  test "Chinese locale":
-    check LocaleZh.name == "zh"
-    check LocaleZh.pluralRule == prInvariant
-    check LocaleZh.ordinalRule == orChinese
+  test "Chinese":
+    check LangZh.name == "zh"
+    check LangZh.pluralRule == prInvariant
 
-  test "Arabic locale":
-    check LocaleAr.name == "ar"
-    check LocaleAr.pluralRule == prArabic
-    check LocaleAr.ordinalRule == orArabic
+  test "Arabic":
+    check LangAr.name == "ar"
+    check LangAr.pluralRule == prArabic
 
 suite "pluralize - Arabic rule":
   let forms = Plurals(one: "book", few: "books-few", many: "books-many")

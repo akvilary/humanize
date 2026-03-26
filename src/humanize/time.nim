@@ -18,7 +18,7 @@ const
 func naturalDelta*(
   duration: Duration,
   months: bool = true,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Express a Duration as a human-readable delta (unsigned).
   ##
@@ -71,7 +71,7 @@ func naturalDelta*(
 func naturalDelta*(
   seconds: int,
   months: bool = true,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Convenience overload taking seconds as int.
   naturalDelta(initDuration(seconds = seconds), months, locale)
@@ -80,7 +80,7 @@ proc naturalTime*(
   dt: DateTime,
   now: DateTime = now(),
   months: bool = true,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Express a DateTime relative to `now` as human-readable text.
   ##
@@ -102,7 +102,7 @@ proc naturalTime*(
   t: Time,
   now: Time = getTime(),
   months: bool = true,
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Time overload of `naturalTime`.
   naturalTime(t.local, now.local, months, locale)
@@ -110,7 +110,7 @@ proc naturalTime*(
 proc naturalDay*(
   dt: DateTime,
   now: DateTime = now(),
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Return "today", "tomorrow", "yesterday", or a formatted date string.
   ##
@@ -139,7 +139,7 @@ proc naturalDay*(
 proc naturalDate*(
   dt: DateTime,
   now: DateTime = now(),
-  locale: Locale = DefaultLocale,
+  locale: Locale = LangEn,
 ): string =
   ## Like `naturalDay` but includes the year for dates not in the current year.
   ##
