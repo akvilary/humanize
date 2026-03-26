@@ -6,6 +6,7 @@ import humanize/locales/fr
 import humanize/locales/it
 import humanize/locales/ru
 import humanize/locales/zh
+import humanize/locales/ar
 
 suite "pluralize":
   let forms = Plurals(one: "cat", few: "cats", many: "cats")
@@ -127,3 +128,40 @@ suite "locale definitions":
     check LocaleZh.name == "zh"
     check LocaleZh.pluralRule == prInvariant
     check LocaleZh.ordinalRule == orChinese
+
+  test "Arabic locale":
+    check LocaleAr.name == "ar"
+    check LocaleAr.pluralRule == prArabic
+    check LocaleAr.ordinalRule == orArabic
+
+suite "pluralize - Arabic rule":
+  let forms = Plurals(one: "book", few: "books-few", many: "books-many")
+
+  test "1 -> one":
+    check pluralize(1, forms, prArabic) == "book"
+
+  test "2 -> few":
+    check pluralize(2, forms, prArabic) == "books-few"
+
+  test "3-10 -> few":
+    check pluralize(3, forms, prArabic) == "books-few"
+    check pluralize(5, forms, prArabic) == "books-few"
+    check pluralize(10, forms, prArabic) == "books-few"
+
+  test "11-99 -> many":
+    check pluralize(11, forms, prArabic) == "books-many"
+    check pluralize(25, forms, prArabic) == "books-many"
+    check pluralize(99, forms, prArabic) == "books-many"
+
+  test "100 -> many":
+    check pluralize(100, forms, prArabic) == "books-many"
+
+  test "103-110 -> few":
+    check pluralize(103, forms, prArabic) == "books-few"
+    check pluralize(110, forms, prArabic) == "books-few"
+
+  test "111 -> many":
+    check pluralize(111, forms, prArabic) == "books-many"
+
+  test "0 -> many":
+    check pluralize(0, forms, prArabic) == "books-many"

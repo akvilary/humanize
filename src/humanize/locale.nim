@@ -11,6 +11,7 @@ type
     prGermanic    ## en, de, it, es: 1 -> one, else -> many
     prFrench      ## fr: 0-1 -> one, else -> many
     prSlavic      ## ru: complex rule with 11-14 exceptions
+    prArabic      ## ar: 1->one, 2->few, 3-10->few, 11-99->many, 100+->few
     prInvariant   ## zh: always -> many
 
   OrdinalRule* = enum
@@ -22,6 +23,7 @@ type
     orItalian     ## 1°/1ª, 2°/2ª...
     orRussian     ## 1-й, 2-й, 3-й...
     orChinese     ## 第1, 第2, 第3...
+    orArabic      ## plain number (no suffix convention)
 
   Gender* = enum
     ## Grammatical gender for ordinals in gendered languages.
@@ -90,6 +92,16 @@ func pluralize*(
     if mod10 == 1 and mod100 != 11:
       forms.one
     elif mod10 in {2, 3, 4} and mod100 notin {12, 13, 14}:
+      forms.few
+    else:
+      forms.many
+  of prArabic:
+    let mod100 = absN mod 100
+    if absN == 1:
+      forms.one
+    elif absN == 2:
+      forms.few
+    elif mod100 >= 3 and mod100 <= 10:
       forms.few
     else:
       forms.many

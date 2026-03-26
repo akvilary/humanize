@@ -49,6 +49,8 @@ func ordinal*(
     s & "-\xD0\xB9"  # -й
   of orChinese:
     "\xE7\xAC\xAC" & s  # 第
+  of orArabic:
+    s
 
 func intComma*(
   n: int,

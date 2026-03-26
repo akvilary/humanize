@@ -24,7 +24,7 @@ src/
     number.nim              # ordinal, intComma, intWord, apNumber
     list.nim                # naturalList
     locales/
-      de.nim, es.nim, fr.nim, it.nim, ru.nim, zh.nim
+      ar.nim, de.nim, es.nim, fr.nim, it.nim, ru.nim, zh.nim
 
 tests/
   test_locale.nim, test_filesize.nim, test_time.nim,
@@ -91,4 +91,4 @@ Locale = object  # all enums, no procs — can be const
 
 ## Locales to ship
 
-en (built-in default), de, es, fr, it, ru, zh
+en (built-in default), ar, de, es, fr, it, ru, zh
